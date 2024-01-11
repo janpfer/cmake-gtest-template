@@ -13,7 +13,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 # Add code coverage flags
-option(CodeCoverage "CodeCoverage" OFF)
+option(CodeCoverage "CodeCoverage" ON)
 
 add_executable(
   test_mylibrary

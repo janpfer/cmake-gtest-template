@@ -1,5 +1,4 @@
 # src/testsLib/CMakeLists.txt
-
 project(my_project)
 
 include(FetchContent)
@@ -13,19 +12,28 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
+# Add code coverage flags
+option(CodeCoverage "CodeCoverage" OFF)
+
 add_executable(
   test_mylibrary
   test_mylibrary.cpp
   test_hello.cpp
-  )
+)
+
 target_link_libraries(
   test_mylibrary PRIVATE
   copyfi
   GTest::gtest_main
   pthread
-  )
+)
+
+if (CodeCoverage MATCHES ON)
+    set_target_properties(test_mylibrary PROPERTIES COMPILE_FLAGS "-g -O0 --coverage -fprofile-arcs -ftest-coverage")
+    set_target_properties(test_mylibrary PROPERTIES LINK_FLAGS "--coverage")
+endif()
 
 include(GoogleTest)
 gtest_discover_tests(
   test_mylibrary
-  )
+)

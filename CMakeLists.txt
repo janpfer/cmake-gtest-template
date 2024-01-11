@@ -4,7 +4,7 @@ project(
     VERSION 0.1
     DESCRIPTION "An example project with CMake & Google Test"
     LANGUAGES CXX
-    )
+)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 20)
@@ -45,3 +45,14 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     COMMENT "Running Cpplint"
 )
+
+# Include CodeCoverage.cmake
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules/)
+include(CodeCoverage)
+
+# Add code coverage flags
+option(CodeCoverage "CodeCoverage" OFF)
+if (CodeCoverage MATCHES ON)
+    setup_target_for_coverage(${PROJECT_NAME}_coverage ctest coverage)
+    setup_target_for_coverage_cobertura(${PROJECT_NAME}_cobertura ctest coverage --gtest_output=xml:coverage.junit.xml)
+endif()

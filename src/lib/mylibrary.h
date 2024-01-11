@@ -1,15 +1,10 @@
 // src/lib/mylibrary.h
 #ifndef MYLIBRARY_H
 #define MYLIBRARY_H
+#include "copyfi_h.h"
 
-#ifdef __cplusplus
 extern "C" {
-#endif
-
-void helloWorld();
-
-#ifdef __cplusplus
+    COPYFI_API void helloWorld();
 }
-#endif
 
 #endif // MYLIBRARY_H

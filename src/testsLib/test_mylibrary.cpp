@@ -1,25 +1,12 @@
 // src/tests/test_mylibrary.cpp
 #include <gtest/gtest.h>
-#include <dlfcn.h>
-
-// Forward declaration for the function pointer type
-typedef void (*HelloWorldFunction)();
+#include "copyfi_h.h"
 
 TEST(MyLibraryTest, HelloWorld) {
-    void* libraryHandle = dlopen("./lib/libcopyfi.so", RTLD_LAZY);
-
-    ASSERT_TRUE(libraryHandle != nullptr);
-
-    // Use the correct function pointer type
-    HelloWorldFunction helloWorldFunc = (HelloWorldFunction)dlsym(libraryHandle, "helloWorld");
-
-    ASSERT_TRUE(helloWorldFunc != nullptr);
-
+    // Call the function directly from the library (assuming it's linked)
     testing::internal::CaptureStdout();
-    helloWorldFunc();
+    helloWorld();
     std::string output = testing::internal::GetCapturedStdout();
-
-    dlclose(libraryHandle);
 
     EXPECT_EQ(output, "Hello World!\n");
 }

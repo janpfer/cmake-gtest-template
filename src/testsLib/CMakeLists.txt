@@ -1,5 +1,12 @@
 # src/testsLib/CMakeLists.txt
 
+cmake_minimum_required(VERSION 3.14)
+project(my_project)
+
+# GoogleTest requires at least C++14
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -9,16 +16,21 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-# Ensure that the GTEST_INCLUDE_DIRS variable is set correctly
-include_directories(${googletest_SOURCE_DIR}/googletest/include)
-
-# Set FETCHCONTENT_SOURCE_DIR_GOOGLETEST to suppress the warning
-set(FETCHCONTENT_SOURCE_DIR_GOOGLETEST ${googletest_SOURCE_DIR} CACHE INTERNAL "")
-
 enable_testing()
 
-add_executable(test_mylibrary test_mylibrary.cpp)
-target_link_libraries(test_mylibrary PRIVATE copyfi ${GTEST_LIBRARIES} pthread)
+add_executable(
+  test_mylibrary
+  test_mylibrary.cpp
+  test_hello.cpp
+  )
+target_link_libraries(
+  test_mylibrary PRIVATE
+  copyfi
+  GTest::gtest_main
+  pthread
+  )
 
 include(GoogleTest)
-gtest_discover_tests(test_mylibrary)
+gtest_discover_tests(
+  test_mylibrary
+  )

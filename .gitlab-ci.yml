@@ -1,3 +1,5 @@
+image: gcc
+
 stages:
   - build
   - test
@@ -34,16 +36,20 @@ coverage:
 
 release:
   stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
   only:
     - tags
+  needs:
+    - test
   script:
     - echo "Creating release $CI_COMMIT_REF_NAME"
     - mkdir release
     - cp build/bin/* release/
+    - cp build/lib/*.so release/
   artifacts:
     paths:
       - release/*
   release:
-    name: $CI_COMMIT_REF_NAME
-    tag_name: $CI_COMMIT_REF_NAME
-    description: "Release for tag $CI_COMMIT_REF_NAME"
+    name: $CI_COMMIT_TAG
+    tag_name: 'Release $CI_COMMIT_TAG'
+    description: $CI_COMMIT_TAG_DESCRIPTION

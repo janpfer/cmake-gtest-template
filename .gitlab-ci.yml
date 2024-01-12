@@ -9,7 +9,7 @@ variables:
   CMAKE_BUILD_TYPE: Debug
 
 before_script:
-  - apt-get update -qq && apt-get install -y cmake g++ lcov
+  - apt-get update -qq && apt-get install -y cmake g++ lcov genhtml
 
 build:
   stage: build
@@ -38,7 +38,6 @@ coverage:
     - lcov --directory . --capture --output-file coverage.info
     - lcov --remove coverage.info '/usr/*' --output-file coverage.info
     - genhtml -o coverage_report coverage.info
-    - echo "Coverage: $(lcov --summary coverage.info | grep 'lines......:' | awk '{print $3}')%"
   needs:
     - build
   artifacts:

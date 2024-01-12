@@ -1,7 +1,10 @@
 # src/consoleApp/CMakeLists.txt
-project(ccopify)
 
-add_executable(ccopyfi main.cpp)
+add_executable(
+    ccopyfi 
+    main.cpp
+    some.h
+    )
 
 # Include the common API header
 target_include_directories(ccopyfi PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../include/)

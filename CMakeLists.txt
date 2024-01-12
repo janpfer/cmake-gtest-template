@@ -1,3 +1,4 @@
+# CMakeLists.txt
 cmake_minimum_required(VERSION 3.15)
 project(
     CopyFi
@@ -14,6 +15,29 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+enable_testing()
+
+# Add code coverage flags
+option(CodeCoverage "CodeCoverage" ON)
+
+# Include CodeCoverage.cmake
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules/)
+include(CodeCoverage)
+
+#if (CodeCoverage MATCHES ON)
+#    setup_target_for_coverage(${PROJECT_NAME}_coverage ctest coverage)
+#    setup_target_for_coverage_cobertura(${PROJECT_NAME}_cobertura ctest coverage --gtest_output=xml:coverage.junit.xml)
+#endif()
+
 # Source files
 file(GLOB_RECURSE ALL_SOURCE_FILES
     ${CMAKE_SOURCE_DIR}/src/*.cpp
@@ -24,8 +48,10 @@ file(GLOB_RECURSE ALL_SOURCE_FILES
 
 # Add subdirectories
 add_subdirectory(src/lib)
-add_subdirectory(src/consoleApp)
 add_subdirectory(src/testsLib)
+add_subdirectory(src/consoleApp)
+add_subdirectory(src/testsConsoleApp)
+
 
 # Set up ClangFormat target for all source files
 add_custom_target(
@@ -45,14 +71,3 @@ add_custom_target(
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     COMMENT "Running Cpplint"
 )
-
-# Include CodeCoverage.cmake
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules/)
-include(CodeCoverage)
-
-# Add code coverage flags
-option(CodeCoverage "CodeCoverage" OFF)
-if (CodeCoverage MATCHES ON)
-    setup_target_for_coverage(${PROJECT_NAME}_coverage ctest coverage)
-    setup_target_for_coverage_cobertura(${PROJECT_NAME}_cobertura ctest coverage --gtest_output=xml:coverage.junit.xml)
-endif()

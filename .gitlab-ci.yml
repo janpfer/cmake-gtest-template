@@ -12,16 +12,14 @@ before_script:
 build:
   stage: build
   script:
-    - mkdir build
-    - cd build
-    - cmake -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE ..
-    - make
+    - cmake -S . -B build -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE
+    - cmake --build build
 
 test:
   stage: test
   script:
     - cd build
-    - ctest
+    - ctest --output-on-failure
 
 coverage:
   stage: test

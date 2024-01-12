@@ -16,12 +16,20 @@ build:
   script:
     - cmake -S . -B build -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE
     - cmake --build build
+  artifacts:
+    paths:
+      - build/
 
 test:
   stage: test
   script:
     - cd build
     - ctest --output-on-failure
+  dependencies:
+    - build
+  artifacts:
+    paths:
+      - build/
 
 coverage:
   stage: test
@@ -46,6 +54,8 @@ release:
     - mkdir release
     - cp build/bin/* release/
     - cp build/lib/*.so release/
+  dependencies:
+    - build
   artifacts:
     paths:
       - release/*

@@ -48,14 +48,13 @@ release:
   only:
     - tags
   needs:
+    - build
     - test
   script:
     - echo "Creating release $CI_COMMIT_REF_NAME"
     - mkdir release
     - cp build/bin/* release/
     - cp build/lib/*.so release/
-  dependencies:
-    - build
   artifacts:
     paths:
       - release/*

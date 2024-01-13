@@ -20,37 +20,35 @@ build:
     paths:
       - build/
 
+#https://docs.gitlab.com/ee/ci/testing/unit_test_report_examples.html
 test:
   stage: test
+  needs:
+    - build
+  script:
+    - cd build/bin
+    - for test_executable in test_*; do ./$test_executable --gtest_output="xml:report-${test_executable}.xml"; done
+  artifacts:
+    when: always
+    reports:
+      junit: test_results-*.xml
+
+#https://docs.gitlab.com/ee/ci/testing/test_coverage_visualization.html
+coverage:
+  stage: test
+  needs:
+    - build
   script:
     - cd build
     - ctest --output-on-failure
-  dependencies:
-    - build
-  artifacts:
-    paths:
-      - build/
-    expire_in: 1 week
-
-coverage:
-  stage: test
-  script:
-    - cd build
-    - lcov --directory . --capture --output-file coverage.info
-    - lcov --remove coverage.info '/usr/*' --output-file coverage.info
-    - genhtml -o coverage_report coverage.info
+    - cd ..
     - gcovr --xml-pretty --exclude-unreachable-branches --print-summary -o coverage.xml --root ${CI_PROJECT_DIR}
   coverage: /^\s*lines:\s*\d+.\d+\%/
-  needs:
-    - build
   artifacts:
     reports:
       coverage_report:
         coverage_format: cobertura
         path: build/coverage.xml
-    paths:
-      - build/coverage_report
-    expire_in: 1 week
 
 release:
   stage: release

@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/ccopyfi.dir/main.cpp.o -o ../../bin/ccopyfi  -Wl,-rpath,/home/kali/repos/cmake-gtest-template/release/lib ../../lib/libcopyfi.so 

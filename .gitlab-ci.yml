@@ -7,6 +7,7 @@ stages:
 
 variables:
   CMAKE_BUILD_TYPE: Debug
+  RELEASE_ART_JOB_ID: 0
 
 before_script:
   - apt-get update -qq && apt-get install -y cmake g++ lcov gcovr
@@ -51,9 +52,8 @@ coverage:
         coverage_format: cobertura
         path: build/coverage.xml
 
-release:
+prepare-relese:
   stage: release
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
   only:
     - tags
   needs:
@@ -67,10 +67,23 @@ release:
     - mkdir -p $CI_COMMIT_TAG
     - cp release/bin/* $CI_COMMIT_TAG
     - cp -R release/lib $CI_COMMIT_TAG
+    - RELEASE_ART_JOB_ID=${BUILD_JOB_ID}
+    - echo "RELEASE_ART_JOB_ID=${BUILD_JOB_ID}" >> variables.env
   artifacts:
+    reports:
+      dotenv: variables.env  
     paths:
       - $CI_COMMIT_TAG/*
     expire_in: never
+
+release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  only:
+    - tags
+  needs:
+    - job: prepare-relese
+      artifacts: true
   release:
     tag_name: $CI_COMMIT_TAG
     name: 'Release $CI_COMMIT_TAG'
@@ -78,4 +91,4 @@ release:
     assets:
       links:
         - name: $CI_COMMIT_TAG_DESCRIPTION
-          url: '${CI_PROJECT_URL}/-/jobs/${BUILD_JOB_ID}/artifacts/$CI_COMMIT_TAG'
+          url: '${CI_PROJECT_URL}/-/jobs/${RELEASE_ART_JOB_ID}/artifacts/$CI_COMMIT_TAG'

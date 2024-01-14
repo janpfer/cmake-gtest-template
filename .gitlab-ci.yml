@@ -32,7 +32,7 @@ test:
   artifacts:
     when: always
     reports:
-      junit: report-*.xml
+      junit: report-test_*.xml
 
 #https://docs.gitlab.com/ee/ci/testing/test_coverage_visualization.html
 coverage:

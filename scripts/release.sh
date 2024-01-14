@@ -33,7 +33,8 @@ git commit -m "$commit_message"
 git tag -a "v$new_version" -m "Version $new_version"
 
 # Push the commit and tags to the repository
-git push origin main
-git push origin "v$new_version"
+git push --follow-tags
+#git push origin main
+#git push origin "v$new_version"
 
 echo "Version $new_version has been staged, committed, tagged, and pushed."

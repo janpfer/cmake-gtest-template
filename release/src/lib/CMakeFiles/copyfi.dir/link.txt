@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -O3 -DNDEBUG --coverage -shared -Wl,-soname,libcopyfi.so -o ../../lib/libcopyfi.so CMakeFiles/copyfi.dir/mylibrary.cpp.o 

@@ -1,1 +1,0 @@
-/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/test_mylibrary.dir/test_mylibrary.cpp.o CMakeFiles/test_mylibrary.dir/test_hello.cpp.o -o ../../bin/test_mylibrary  -Wl,-rpath,/home/kali/repos/cmake-gtest-template/release/lib ../../lib/libcopyfi.so ../../lib/libgtest_main.a -lpthread ../../lib/libgtest.a 

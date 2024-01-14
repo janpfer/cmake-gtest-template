@@ -1,5 +1,0 @@
-if(EXISTS "/home/kali/repos/cmake-gtest-template/release/src/testsLib/test_mylibrary[1]_tests.cmake")
-  include("/home/kali/repos/cmake-gtest-template/release/src/testsLib/test_mylibrary[1]_tests.cmake")
-else()
-  add_test(test_mylibrary_NOT_BUILT test_mylibrary_NOT_BUILT)
-endif()

@@ -66,9 +66,9 @@ prepare_job:
     - rm -rf release/bin/test_*
     - mkdir -p $CI_COMMIT_TAG
     - cp release/bin/* $CI_COMMIT_TAG
-    - cp -R release/lib $CI_COMMIT_TAG
-    - RELEASE_ART_JOB_ID=${BUILD_JOB_ID}
-    - echo "RELEASE_ART_JOB_ID=${BUILD_JOB_ID}" >> variables.env
+    - cp -R release/lib/*.so $CI_COMMIT_TAG
+    - echo "RELEASE_ART_JOB_ID=$CI_JOB_ID"
+    - echo "RELEASE_ART_JOB_ID=$CI_JOB_ID" >> variables.env
   artifacts:
     reports:
       dotenv: variables.env  
@@ -94,4 +94,4 @@ release_job:
     assets:
       links:
         - name: 'Release $CI_COMMIT_TAG'
-          url: '${CI_PROJECT_URL}/-/jobs/${RELEASE_ART_JOB_ID}/artifacts/$CI_COMMIT_TAG'
+          url: '${CI_PROJECT_URL}/-/jobs/${RELEASE_ART_JOB_ID}/artifacts/download'

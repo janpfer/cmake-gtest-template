@@ -90,8 +90,8 @@ release_job:
   release:
     tag_name: $CI_COMMIT_TAG
     name: 'Release $CI_COMMIT_TAG'
-    description: $CI_COMMIT_TAG_DESCRIPTION
+    description: 'Release $CI_COMMIT_TAG'
     assets:
       links:
-        - name: $CI_COMMIT_TAG_DESCRIPTION
+        - name: 'Release $CI_COMMIT_TAG'
           url: '${CI_PROJECT_URL}/-/jobs/${RELEASE_ART_JOB_ID}/artifacts/$CI_COMMIT_TAG'

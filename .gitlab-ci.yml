@@ -31,6 +31,8 @@ test:
     - for test_executable in test_*; do ./$test_executable --gtest_output="xml:report-${test_executable}.xml"; done
   artifacts:
     when: always
+    paths:
+      - report-test_*.xml
     reports:
       junit: report-test_*.xml
 
@@ -47,6 +49,8 @@ coverage:
   coverage: /^\s*lines:\s*\d+.\d+\%/
   artifacts:
     when: always
+    paths:
+      - build/coverage.xml
     reports:
       coverage_report:
         coverage_format: cobertura

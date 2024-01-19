@@ -32,9 +32,9 @@ test:
   artifacts:
     when: always
     paths:
-      - ./*.xml
+      - build/bin/*.xml
     reports:
-      junit: ./*.xml
+      junit: build/bin/*.xml
 
 #https://docs.gitlab.com/ee/ci/testing/test_coverage_visualization.html
 coverage:

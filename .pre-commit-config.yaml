@@ -42,4 +42,6 @@ repos:
     hooks:
       - id: cpplint
         args:
-          ["--filter=-build/include_what_you_use,-whitespace,-legal/copyright"]
+          [
+            "--filter=-build/include_what_you_use,-build/include_subdir,-whitespace,-legal/copyright",
+          ]

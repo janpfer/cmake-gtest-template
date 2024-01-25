@@ -1,7 +1,7 @@
 // src/tests/test_mylibrary.cpp
 #include <gtest/gtest.h>
 
-#include "src/include/copyfi_h.h"
+#include "copyfi_h.h"
 
 TEST(MyLibraryTest, HelloWorld) {
   // Call the function directly from the library (assuming it's linked)

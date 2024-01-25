@@ -1,6 +1,6 @@
 // src/consoleApp/main.cpp
-#include "src/consoleApp/some.h"
-#include "src/include/copyfi_h.h"
+#include "copyfi_h.h"
+#include "some.h"
 
 int main() {
   // Use functions from the library

@@ -1,7 +1,7 @@
 // src/tests/test_mylibrary.cpp
 #include <gtest/gtest.h>
 
-#include "src/consoleApp/some.h"
+#include "some.h"
 
 TEST(MyMainTest, HelloComputer) {
   // Call the function directly from the library (assuming it's linked)

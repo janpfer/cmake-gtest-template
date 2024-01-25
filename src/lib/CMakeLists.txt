@@ -1,5 +1,5 @@
 # src/lib/CMakeLists.txt
-add_library(copyfi SHARED mylibrary.cpp)
+add_library(copyfi SHARED mylibrary.cpp mylibrary.h)
 
 # Include the common API header
 target_include_directories(

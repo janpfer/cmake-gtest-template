@@ -1,6 +1,6 @@
 // src/lib/mylibrary.cpp
 #include <iostream>
 
-#include "src/lib/mylibrary.h"
+#include "mylibrary.h"
 
 void helloWorld() { std::cout << "Hello World!" << std::endl; }

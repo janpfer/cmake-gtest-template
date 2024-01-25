@@ -4,10 +4,10 @@
 ![![GitLab tag](https://gitlab.pfiffner.dev/cmake-gtest-template/-/badges/release.svg)](https://gitlab.pfiffner.dev/cmake-gtest-template/-/releases)
 [![Build Status](https://gitlab.pfiffner.dev/cmake-gtest-template/badges/main/pipeline.svg)](https://gitlab.pfiffner.dev/cmake-gtest-template/-/commits/main)
 
-
 `cmake-gtest-template` is an example project that demonstrates the use of CMake for building C++ projects with Google Test integration, code coverage, and a GitLab CI pipeline for continuous integration.
 
 ## Table of Contents
+
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Building the Project](#building-the-project)

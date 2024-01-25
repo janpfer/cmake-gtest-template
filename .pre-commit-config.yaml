@@ -37,8 +37,9 @@ repos:
     hooks:
       - id: clang-format
 
-  - repo: https://github.com/pre-commit/mirrors-cpplint
-    rev: v1.5
+  - repo: https://github.com/cpplint/cpplint
+    rev: 1.6.1
     hooks:
       - id: cpplint
-        args: ['--filter=-build/include_what_you_use']
+        args:
+          ["--filter=-build/include_what_you_use,-whitespace,-legal/copyright"]

@@ -1,6 +1,6 @@
-// copyfi_h.h
-#ifndef COPYFI_H_H
-#define COPYFI_H_H
+// src/include/copyfi_h.h
+#ifndef SRC_INCLUDE_COPYFI_H_H_
+#define SRC_INCLUDE_COPYFI_H_H_
 
 #define COPYFI_API
 
@@ -14,4 +14,4 @@ COPYFI_API void helloWorld();
 }
 #endif
 
-#endif // COPYFI_H_H
+#endif // SRC_INCLUDE_COPYFI_H_H_

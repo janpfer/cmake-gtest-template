@@ -1,10 +1,10 @@
 // src/lib/mylibrary.h
-#ifndef MYLIBRARY_H
-#define MYLIBRARY_H
-#include "copyfi_h.h"
+#ifndef SRC_LIB_MYLIBRARY_H_
+#define SRC_LIB_MYLIBRARY_H_
+#include "src/include/copyfi_h.h"
 
 extern "C" {
-    COPYFI_API void helloWorld();
+COPYFI_API void helloWorld();
 }
 
-#endif // MYLIBRARY_H
+#endif // SRC_LIB_MYLIBRARY_H_

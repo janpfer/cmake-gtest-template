@@ -66,6 +66,7 @@ pre-commit:
       - ${PRE_COMMIT_HOME}
   before_script:
     - apt update && apt install -y --no-install-recommends git
+    - pip install pre-commit
   script:
     - pre-commit run --from-ref origin/HEAD --to-ref HEAD
 
